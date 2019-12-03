@@ -1,0 +1,25 @@
+{
+  "name": "readable-elapsed-timer",
+  "version": "0.1.0",
+  "description": "Easily get time elapsed. Returns human readable format by default.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcaubrey/readable-elapsed-timer.git"
+  },
+  "keywords": [
+    "readable",
+    "time",
+    "elapsed",
+    "timer"
+  ],
+  "author": "Michael Charles Aubrey <mcaubrey511@gmail.com> (https://michaelcharl.es/aubrey)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mcaubrey/readable-elapsed-timer/issues"
+  },
+  "homepage": "https://github.com/mcaubrey/readable-elapsed-timer#readme"
+}
