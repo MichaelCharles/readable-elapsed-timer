@@ -26,17 +26,17 @@ const main = async () => {
   const timer = new Timer();
   await delay(100);
   console.log(timer.elapsed());
-  // Will log "100 miliseconds"
+  // "100 miliseconds"
 
   timer.reset()
   await delay(500);
   console.log(timer.elapsed());
-  // Will log "500 miliseconds"
+  // "500 miliseconds"
 
   await delay(1000);
   console.log(timer.elapsed());
-  // Will log "1.5 seconds"
-  // (Notice we didn't reset the timer this time.)
+  // "1.5 seconds"
+  // Notice we didn't reset the timer this time.
 };
 
 main()
@@ -50,7 +50,7 @@ npm install readable-elapsed-time
 
 ## Advanced Usage
 
-The constructor accepts an `options` object as an argument. 
+The constructor accepts an `options` object as an argument.
 
 ```
 const options = {
@@ -63,10 +63,15 @@ All of the `elapsed` family of methods accept an `options` argument as well. In 
 
 ```
 const options = {
-    start: new Date('November 5, 1955').getTime(),
-    start: new Date('October 21, 2015').getTime(),
-    brief: false,
-}
+    start: new Date("November 5, 1955").getTime(),
+    end: new Date("October 21, 2015").getTime(),
+    brief: false
+};
+
+const elapsed = timer.elapsed(options);
+
+console.log(elapsed);
+// "525600 hours"
 ```
 
 Setting `start` allows you to give the timer instance an arbitrary start time. Setting `brief` changes the default function of the timer instance to show time formatted as abbreviations ("5s" instead of "5 seconds").
