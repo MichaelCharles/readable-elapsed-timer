@@ -54,8 +54,18 @@ The constructor accepts an `options` object as an argument.
 
 ```
 const options = {
-    start: new Date('November 5, 1955).getTime(),
+    start: new Date('November 5, 1955').getTime(),
     brief: true
+}
+```
+
+All of the `elapsed` family of methods accept an `options` argument as well. In addition to the options available on the constructor, you can set an `end` time. This allows you to get time elapsed without actually needing to wait.
+
+```
+const options = {
+    start: new Date('November 5, 1955').getTime(),
+    start: new Date('October 21, 2015').getTime(),
+    brief: false,
 }
 ```
 

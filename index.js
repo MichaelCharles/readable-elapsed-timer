@@ -33,8 +33,8 @@ var Timer = /** @class */ (function () {
         this.brief = options.brief;
     };
     Timer.prototype.elapsed = function (options) {
-        if (options === void 0) { options = { start: this.start, end: new Date().getTime() }; }
-        return this.getReadable(this.elapsedRaw(options), { brief: this.brief });
+        if (options === void 0) { options = { start: this.start, end: new Date().getTime(), brief: this.brief }; }
+        return this.getReadable(this.elapsedRaw(options), { brief: (options.brief || this.brief) });
     };
     Timer.prototype.elapsedVerbose = function (options) {
         if (options === void 0) { options = { start: this.start, end: new Date().getTime() }; }

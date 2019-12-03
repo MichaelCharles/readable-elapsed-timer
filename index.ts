@@ -1,8 +1,19 @@
+interface moduleOptions {
+	start?: number,
+	brief?: boolean,
+}
+
+interface elapsedOptions {
+	start?: number,
+	end?: number,
+	brief?: boolean
+}
+
 class Timer {
 	start: number
 	brief: boolean
 
-	constructor(options = {
+	constructor(options: moduleOptions = {
 		start: new Date().getTime(),
 		brief: false
 	}) {
@@ -10,7 +21,7 @@ class Timer {
 		this.brief = options.brief
 	}
 
-	getReadable(miliseconds, options = { brief: this.brief }) {
+	getReadable(miliseconds, options: moduleOptions = { brief: this.brief }) {
 		const { brief } = options
 		const seconds = miliseconds / 1000
 
@@ -35,7 +46,7 @@ class Timer {
 		return `${parseFloat(hours.toFixed(2))}${brief ? 'h' : hours === 1 ? ' hour' : ' hours'}`
 	}
 
-	reset(options = {
+	reset(options: moduleOptions = {
 		start: new Date().getTime(),
 		brief: false
 	}) {
@@ -43,19 +54,19 @@ class Timer {
 		this.brief = options.brief
 	}
 
-	elapsed(options = { start: this.start, end: new Date().getTime() }) {
-		return this.getReadable(this.elapsedRaw(options), { brief: this.brief })
+	elapsed(options: elapsedOptions = { start: this.start, end: new Date().getTime(), brief: this.brief }) {
+		return this.getReadable(this.elapsedRaw(options), { brief: (options.brief || this.brief) })
 	}
 
-	elapsedVerbose(options = { start: this.start, end: new Date().getTime() }) {
+	elapsedVerbose(options: elapsedOptions = { start: this.start, end: new Date().getTime() }) {
 		return this.getReadable(this.elapsedRaw(options), { brief: false })
 	}
 
-	elapsedBrief(options = { start: this.start, end: new Date().getTime() }) {
+	elapsedBrief(options: elapsedOptions = { start: this.start, end: new Date().getTime() }) {
 		return this.getReadable(this.elapsedRaw(options), { brief: true })
 	}
 
-	elapsedRaw(options = { start: this.start, end: new Date().getTime() }) {
+	elapsedRaw(options: elapsedOptions = { start: this.start, end: new Date().getTime() }) {
 		return (options.end || new Date().getTime()) - (options.start || this.start)
 	}
 }
