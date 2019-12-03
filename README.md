@@ -1,3 +1,5 @@
+![Branch Badge](./coverage/badge-branches.svg) ![Branch Badge](./coverage/badge-functions.svg) ![Branch Badge](./coverage/badge-lines.svg) ![Branch Badge](./coverage/badge-statements.svg)
+
 # Readable Elapsed Timer
 
 A tool for easily finding the time elapsed between two parts of your code.
