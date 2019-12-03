@@ -1,0 +1,69 @@
+# Readable Elapsed Timer
+
+A tool for easily finding the time elapsed between two parts of your code.
+
+## Usage
+
+Import the `Timer` class at the top of your file. If your project uses ES6 modules then do the following.
+
+```
+import Timer from "readable-elapsed-timer";
+```
+
+If your poject uses CommonJS modules, then do the following.
+
+```
+const Timer = require('readable-elapsed-timer')
+```
+
+Then you can create a new timer object to keep track of time within your code. Call the `elapsed()` method to return the time elapsed in a human readable format. To get the time between two different points without creating a new timer object, simply call the `reset()` method.
+
+```
+// Delay function for demonstration purposes.
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+const main = async () => {
+  const timer = new Timer();
+  await delay(100);
+  console.log(timer.elapsed());
+  // Will log "100 miliseconds"
+
+  timer.reset()
+  await delay(500);
+  console.log(timer.elapsed());
+  // Will log "500 miliseconds"
+
+  await delay(1000);
+  console.log(timer.elapsed());
+  // Will log "1.5 seconds"
+  // (Notice we didn't reset the timer this time.)
+};
+
+main()
+```
+
+## Install
+
+```
+npm install readable-elapsed-time
+```
+
+## Advanced Usage
+
+The constructor accepts an `options` object as an argument. 
+
+```
+const options = {
+    start: new Date('November 5, 1955).getTime(),
+    brief: true
+}
+```
+
+Setting `start` allows you to give the timer instance an arbitrary start time. Setting `brief` changes the default function of the timer instance to show time formatted as abbreviations ("5s" instead of "5 seconds").
+
+The following additional methods are available on an instance of `Timer`.
+
+- `elapsedVerbose()` This will return the time elapsed formatted to be human readable even if the timer is configured otherwise. If `timer.elapsedVerbose()` is called after five seconds, `5 seconds` will be returned.
+- `elapsedBrief()` This will return the time elapsed formatted using abbreviations even if the timer is configured otherwise. If `timer.elapsedBrief()` is called after five seconds, `5s` will be returned.
+- `elapsedRaw()` This will return the time elapsed in miliseconds without any additional formatting. If `timer.elapsedRaw()` is called after five seconds, `5000` will be returned.
+- `elapsedRaw()` This will return the time elapsed in miliseconds without any additional formatting. If `timer.elapsedRaw()` is called after five seconds, `5000` will be returned.

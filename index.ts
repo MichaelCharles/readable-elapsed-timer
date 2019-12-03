@@ -1,57 +1,63 @@
 class Timer {
 	start: number
 	brief: boolean
-	
-	constructor() {
-		this.start = new Date().getTime()
-		this.brief = false
 
-		this.getReadable = this.getReadable.bind(this)
-		this.elapsedRaw = this.elapsedRaw.bind(this)
+	constructor(options = {
+		start: new Date().getTime(),
+		brief: false
+	}) {
+		this.start = options.start
+		this.brief = options.brief
 	}
 
-	getReadable(miliseconds) {
-		const { brief } = this
+	getReadable(miliseconds, options = { brief: this.brief }) {
+		const { brief } = options
 		const seconds = miliseconds / 1000
 
 		if (seconds < 1) {
-			return `${miliseconds.toFixed(2)}${
+			return `${parseFloat(miliseconds.toFixed(2))}${
 				brief ? 'ms' : miliseconds === 1 ? ' milisecond' : ' miliseconds'
-			}`
+				}`
 		}
 
 		const minutes = miliseconds / 1000 / 60
 
 		if (minutes < 1) {
-			return `${seconds.toFixed(2)}${brief ? 's' : seconds === 1 ? ' second' : ' seconds'}`
+			return `${parseFloat(seconds.toFixed(2))}${brief ? 's' : seconds === 1 ? ' second' : ' seconds'}`
 		}
 
 		const hours = miliseconds / 1000 / 60 / 60
 
 		if (hours < 1) {
-			return `${minutes.toFixed(2)}${brief ? 'm' : minutes === 1 ? ' minute' : ' minutes'}`
+			return `${parseFloat(minutes.toFixed(2))}${brief ? 'm' : minutes === 1 ? ' minute' : ' minutes'}`
 		}
 
-		return `${hours.toFixed(2)}${brief ? 'h' : hours === 1 ? ' hour' : ' hours'}`
+		return `${parseFloat(hours.toFixed(2))}${brief ? 'h' : hours === 1 ? ' hour' : ' hours'}`
 	}
 
-	reset() {
-		this.start = new Date().getTime()
+	reset(options = {
+		start: new Date().getTime(),
+		brief: false
+	}) {
+		this.start = options.start
+		this.brief = options.brief
 	}
 
-	elapsed() {
-		this.brief = false
-		return this.getReadable(this.elapsedRaw())
+	elapsed(options = { start: this.start, end: new Date().getTime() }) {
+		return this.getReadable(this.elapsedRaw(options), { brief: this.brief })
 	}
 
-	elapsedBrief() {
-		this.brief = true
-		return this.getReadable(this.elapsedRaw())
+	elapsedVerbose(options = { start: this.start, end: new Date().getTime() }) {
+		return this.getReadable(this.elapsedRaw(options), { brief: false })
 	}
 
-	elapsedRaw() {
-		return new Date().getTime() - this.start
+	elapsedBrief(options = { start: this.start, end: new Date().getTime() }) {
+		return this.getReadable(this.elapsedRaw(options), { brief: true })
+	}
+
+	elapsedRaw(options = { start: this.start, end: new Date().getTime() }) {
+		return (options.end || new Date().getTime()) - (options.start || this.start)
 	}
 }
 
-export default Timer
+module.exports = Timer

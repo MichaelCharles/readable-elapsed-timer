@@ -1,42 +1,53 @@
-"use strict";
-exports.__esModule = true;
 var Timer = /** @class */ (function () {
-    function Timer() {
-        this.start = new Date().getTime();
-        this.brief = false;
-        this.getReadable = this.getReadable.bind(this);
-        this.elapsedRaw = this.elapsedRaw.bind(this);
+    function Timer(options) {
+        if (options === void 0) { options = {
+            start: new Date().getTime(),
+            brief: false
+        }; }
+        this.start = options.start;
+        this.brief = options.brief;
     }
-    Timer.prototype.getReadable = function (miliseconds) {
-        var brief = this.brief;
+    Timer.prototype.getReadable = function (miliseconds, options) {
+        if (options === void 0) { options = { brief: this.brief }; }
+        var brief = options.brief;
         var seconds = miliseconds / 1000;
         if (seconds < 1) {
-            return "" + miliseconds.toFixed(2) + (brief ? 'ms' : miliseconds === 1 ? ' milisecond' : ' miliseconds');
+            return "" + parseFloat(miliseconds.toFixed(2)) + (brief ? 'ms' : miliseconds === 1 ? ' milisecond' : ' miliseconds');
         }
         var minutes = miliseconds / 1000 / 60;
         if (minutes < 1) {
-            return "" + seconds.toFixed(2) + (brief ? 's' : seconds === 1 ? ' second' : ' seconds');
+            return "" + parseFloat(seconds.toFixed(2)) + (brief ? 's' : seconds === 1 ? ' second' : ' seconds');
         }
         var hours = miliseconds / 1000 / 60 / 60;
         if (hours < 1) {
-            return "" + minutes.toFixed(2) + (brief ? 'm' : minutes === 1 ? ' minute' : ' minutes');
+            return "" + parseFloat(minutes.toFixed(2)) + (brief ? 'm' : minutes === 1 ? ' minute' : ' minutes');
         }
-        return "" + hours.toFixed(2) + (brief ? 'h' : hours === 1 ? ' hour' : ' hours');
+        return "" + parseFloat(hours.toFixed(2)) + (brief ? 'h' : hours === 1 ? ' hour' : ' hours');
     };
-    Timer.prototype.reset = function () {
-        this.start = new Date().getTime();
+    Timer.prototype.reset = function (options) {
+        if (options === void 0) { options = {
+            start: new Date().getTime(),
+            brief: false
+        }; }
+        this.start = options.start;
+        this.brief = options.brief;
     };
-    Timer.prototype.elapsed = function () {
-        this.brief = false;
-        return this.getReadable(this.elapsedRaw());
+    Timer.prototype.elapsed = function (options) {
+        if (options === void 0) { options = { start: this.start, end: new Date().getTime() }; }
+        return this.getReadable(this.elapsedRaw(options), { brief: this.brief });
     };
-    Timer.prototype.elapsedBrief = function () {
-        this.brief = true;
-        return this.getReadable(this.elapsedRaw());
+    Timer.prototype.elapsedVerbose = function (options) {
+        if (options === void 0) { options = { start: this.start, end: new Date().getTime() }; }
+        return this.getReadable(this.elapsedRaw(options), { brief: false });
     };
-    Timer.prototype.elapsedRaw = function () {
-        return new Date().getTime() - this.start;
+    Timer.prototype.elapsedBrief = function (options) {
+        if (options === void 0) { options = { start: this.start, end: new Date().getTime() }; }
+        return this.getReadable(this.elapsedRaw(options), { brief: true });
+    };
+    Timer.prototype.elapsedRaw = function (options) {
+        if (options === void 0) { options = { start: this.start, end: new Date().getTime() }; }
+        return (options.end || new Date().getTime()) - (options.start || this.start);
     };
     return Timer;
 }());
-exports["default"] = Timer;
+module.exports = Timer;
