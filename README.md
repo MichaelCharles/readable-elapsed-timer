@@ -1,4 +1,4 @@
-![Lines Badge](./coverage/badge-lines.svg) ![Functions Badge](./coverage/badge-functions.svg) ![Branches Badge](./coverage/badge-branches.svg) ![Statements Badge](./coverage/badge-statements.svg)
+![](./coverage/badge-lines.svg) ![](./coverage/badge-functions.svg) ![](./coverage/badge-branches.svg) ![](./coverage/badge-statements.svg)
 
 # Readable Elapsed Timer
 

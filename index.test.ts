@@ -29,7 +29,27 @@ test(`can use elapsedBrief to convert 60000 miliseconds into '1m'.`, () => {
   expect(elapsed).toBe("1m");
 });
 
-test(`can use elapsedVerbose to convert 60000 miliseconds into '1 minute'.`, () => {
+test(`1 milisecond into '1 milisecond'.`, () => {
+  const timer = new TestTimer();
+  const now = new Date().getTime();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 1,
+    end: now
+  });
+  expect(elapsed).toBe("1 milisecond");
+});
+
+test(`2 miliseconds into '2 miliseconds'.`, () => {
+  const timer = new TestTimer();
+  const now = new Date().getTime();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 2,
+    end: now
+  });
+  expect(elapsed).toBe("2 miliseconds");
+});
+
+test(`60000 miliseconds into '1 minute'.`, () => {
   const timer = new TestTimer();
   const now = new Date().getTime();
   const elapsed = timer.elapsedVerbose({
@@ -37,6 +57,56 @@ test(`can use elapsedVerbose to convert 60000 miliseconds into '1 minute'.`, () 
     end: now
   });
   expect(elapsed).toBe("1 minute");
+});
+
+test(`120000 miliseconds into '2 minutes'.`, () => {
+  const timer = new TestTimer();
+  const now = new Date().getTime();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 120000,
+    end: now
+  });
+  expect(elapsed).toBe("2 minutes");
+});
+
+test(`1000 miliseconds into '1 second'.`, () => {
+  const timer = new TestTimer();
+  const now = new Date().getTime();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 1000,
+    end: now
+  });
+  expect(elapsed).toBe("1 second");
+});
+
+test(`2000 miliseconds into '2 seconds'.`, () => {
+  const timer = new TestTimer();
+  const now = new Date().getTime();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 2000,
+    end: now
+  });
+  expect(elapsed).toBe("2 seconds");
+});
+
+test(`3600000 miliseconds into '1 hour'.`, () => {
+  const timer = new TestTimer();
+  const now = new Date().getTime();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 3600000,
+    end: now
+  });
+  expect(elapsed).toBe("1 hour");
+});
+
+test(`7200000 miliseconds into '2 hours'.`, () => {
+  const timer = new TestTimer();
+  const now = new Date().getTime();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 7200000,
+    end: now
+  });
+  expect(elapsed).toBe("2 hours");
 });
 
 test(`can set brief to true on reset`, () => {
@@ -47,11 +117,21 @@ test(`can set brief to true on reset`, () => {
   expect(timer.brief).toBe(true);
 });
 
+test(`can reset without options`, async () => {
+  const timer = new TestTimer();
+  const firstStart = timer.start
+  await delay(100)
+  timer.reset();
+  const secondStart = timer.start
+  expect(firstStart === secondStart).toBeFalsy();
+});
+
 test(`can set start time on reset`, () => {
   const thePast = new Date("September 2, 1885").getTime();
   const timer = new TestTimer();
   timer.reset({
-    start: thePast
+    start: thePast,
+    brief: false
   });
   expect(timer.start).toBe(thePast);
 });
