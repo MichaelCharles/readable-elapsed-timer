@@ -21,7 +21,7 @@ test(`can convert 60000 miliseconds into '1 minute'.`, () => {
 
 test(`can use elapsedBrief to convert 60000 miliseconds into '1m'.`, () => {
   const timer = new TestTimer();
-  const now = new Date().getTime();
+  const now = Date.now();
   const elapsed = timer.elapsedBrief({
     start: now - 60000,
     end: now
@@ -31,7 +31,7 @@ test(`can use elapsedBrief to convert 60000 miliseconds into '1m'.`, () => {
 
 test(`1 milisecond into '1 milisecond'.`, () => {
   const timer = new TestTimer();
-  const now = new Date().getTime();
+  const now = Date.now();
   const elapsed = timer.elapsedVerbose({
     start: now - 1,
     end: now
@@ -41,7 +41,7 @@ test(`1 milisecond into '1 milisecond'.`, () => {
 
 test(`2 miliseconds into '2 miliseconds'.`, () => {
   const timer = new TestTimer();
-  const now = new Date().getTime();
+  const now = Date.now();
   const elapsed = timer.elapsedVerbose({
     start: now - 2,
     end: now
@@ -51,7 +51,7 @@ test(`2 miliseconds into '2 miliseconds'.`, () => {
 
 test(`60000 miliseconds into '1 minute'.`, () => {
   const timer = new TestTimer();
-  const now = new Date().getTime();
+  const now = Date.now();
   const elapsed = timer.elapsedVerbose({
     start: now - 60000,
     end: now
@@ -61,7 +61,7 @@ test(`60000 miliseconds into '1 minute'.`, () => {
 
 test(`120000 miliseconds into '2 minutes'.`, () => {
   const timer = new TestTimer();
-  const now = new Date().getTime();
+  const now = Date.now();
   const elapsed = timer.elapsedVerbose({
     start: now - 120000,
     end: now
@@ -71,7 +71,7 @@ test(`120000 miliseconds into '2 minutes'.`, () => {
 
 test(`1000 miliseconds into '1 second'.`, () => {
   const timer = new TestTimer();
-  const now = new Date().getTime();
+  const now = Date.now();
   const elapsed = timer.elapsedVerbose({
     start: now - 1000,
     end: now
@@ -81,7 +81,7 @@ test(`1000 miliseconds into '1 second'.`, () => {
 
 test(`2000 miliseconds into '2 seconds'.`, () => {
   const timer = new TestTimer();
-  const now = new Date().getTime();
+  const now = Date.now();
   const elapsed = timer.elapsedVerbose({
     start: now - 2000,
     end: now
@@ -91,7 +91,7 @@ test(`2000 miliseconds into '2 seconds'.`, () => {
 
 test(`3600000 miliseconds into '1 hour'.`, () => {
   const timer = new TestTimer();
-  const now = new Date().getTime();
+  const now = Date.now();
   const elapsed = timer.elapsedVerbose({
     start: now - 3600000,
     end: now
@@ -101,7 +101,7 @@ test(`3600000 miliseconds into '1 hour'.`, () => {
 
 test(`7200000 miliseconds into '2 hours'.`, () => {
   const timer = new TestTimer();
-  const now = new Date().getTime();
+  const now = Date.now();
   const elapsed = timer.elapsedVerbose({
     start: now - 7200000,
     end: now
@@ -152,14 +152,14 @@ test(`can init with options to show brief readable time`, () => {
 
 test(`can output elapsed raw as over 9000 (笑)`, () => {
   const timer = new TestTimer({
-    start: new Date().getTime() - 10000
+    start: Date.now() - 10000
   });
   const elapsed = timer.elapsedRaw();
   expect(elapsed).toBeGreaterThan(9000);
 });
 
 test(`can compare arbitrary times by using options`, () => {
-  const now = new Date().getTime();
+  const now = Date.now();
   const timer = new TestTimer({
     start: now - 10000
   });
@@ -171,10 +171,96 @@ test(`can compare arbitrary times by setting start and end in elapsedRaw only`, 
   const timer = new TestTimer({
     brief: true
   });
-  const now = new Date().getTime();
+  const now = Date.now();
   const elapsed = timer.elapsed({
     start: now - 10000,
     end: now + 10000
   });
   expect(elapsed).toBe("20s");
+});
+
+// Test Japanese / ja
+
+test(`When initalized with Japanese, 3600000 miliseconds becomes '1時間'.`, () => {
+  const timer = new TestTimer({
+    language: 'ja'
+  });
+  const now = Date.now();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 3600000,
+    end: now
+  });
+  expect(elapsed).toBe("1時間");
+});
+
+test(`When initalized with Japanese, 7200000 miliseconds becomes '2時間'.`, () => {
+  const timer = new TestTimer({
+    language: 'ja'
+  });
+  const now = Date.now();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 7200000,
+    end: now
+  });
+  expect(elapsed).toBe("2時間");
+});
+
+test(`When initalized with Japanese, 60000 miliseconds becomes '1分'.`, () => {
+  const timer = new TestTimer({ language: 'ja' });
+  const now = Date.now();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 60000,
+    end: now
+  });
+  expect(elapsed).toBe("1分");
+});
+
+test(`When initalized with Japanese, 120000 miliseconds becomes '2分'.`, () => {
+  const timer = new TestTimer({ language: 'ja' });
+  const now = Date.now();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 120000,
+    end: now
+  });
+  expect(elapsed).toBe("2分");
+});
+
+test(`When initalized with Japanese, 2000 miliseconds becomes '2秒'.`, () => {
+  const timer = new TestTimer({ language: 'ja' });
+  const now = Date.now();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 2000,
+    end: now
+  });
+  expect(elapsed).toBe("2秒");
+});
+
+test(`When initalized with Japanese, 1000 miliseconds becomes '1秒'.`, () => {
+  const timer = new TestTimer({ language: 'ja' });
+  const now = Date.now();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 1000,
+    end: now
+  });
+  expect(elapsed).toBe("1秒");
+});
+
+test(`When initalized with Japanese, 2 miliseconds becomes '2ミリ秒'.`, () => {
+  const timer = new TestTimer({ language: 'ja' });
+  const now = Date.now();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 2,
+    end: now
+  });
+  expect(elapsed).toBe("2ミリ秒");
+});
+
+test(`When initalized with Japanese, 1 milisecond becomes '1ミリ秒'.`, () => {
+  const timer = new TestTimer({ language: 'ja' });
+  const now = Date.now();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 1,
+    end: now
+  });
+  expect(elapsed).toBe("1ミリ秒");
 });

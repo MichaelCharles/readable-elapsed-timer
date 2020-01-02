@@ -4,7 +4,7 @@
   "description": "Easily get time elapsed. Returns human readable format by default.",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "npm run build && jest",
     "build": "tsc index.ts",
     "test:coverage": "npm test -- --coverage",
     "test:badges": "npm run test:coverage  && jest-coverage-badges"
