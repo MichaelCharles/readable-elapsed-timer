@@ -84,3 +84,7 @@ The following additional methods are available on an instance of `Timer`.
 - `elapsedBrief()` This will return the time elapsed formatted using abbreviations even if the timer is configured otherwise. If `timer.elapsedBrief()` is called after five seconds, `5s` will be returned.
 - `elapsedRaw()` This will return the time elapsed in miliseconds without any additional formatting. If `timer.elapsedRaw()` is called after five seconds, `5000` will be returned.
 - `elapsedRaw()` This will return the time elapsed in miliseconds without any additional formatting. If `timer.elapsedRaw()` is called after five seconds, `5000` will be returned.
+
+# Releases
+
+* 0.3.1 - Added two more tests for the undocumented language feature. Updated dependencies.

@@ -264,3 +264,31 @@ test(`When initalized with Japanese, 1 milisecond becomes '1ミリ秒'.`, () => 
   });
   expect(elapsed).toBe("1ミリ秒");
 });
+
+test(`When initalized with Japanese, the language settings persist after a reset.`, () => {
+  const timer = new TestTimer({ language: 'ja' });
+  let now = Date.now();
+  let elapsed = timer.elapsedVerbose({
+    start: now - 1,
+    end: now
+  });
+
+  timer.reset();
+  now = Date.now();
+  elapsed = timer.elapsedVerbose({
+    start: now - 1,
+    end: now
+  });
+
+  expect(elapsed).toBe("1ミリ秒");
+});
+
+test(`When initalized with Japanese, the language settings persist after a reset and calling elapsed.`, () => {
+  const timer = new TestTimer({ language: 'ja' });
+  let now = Date.now();
+  let elapsed = timer.elapsed();
+  timer.reset();
+  now = Date.now();
+  elapsed = timer.elapsed();
+  expect((elapsed + "").includes("ミリ秒")).toBe(true);
+});
