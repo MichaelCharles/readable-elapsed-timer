@@ -9,13 +9,13 @@ A tool for easily finding the time elapsed between two parts of your code.
 Import the `Timer` class at the top of your file. If your project uses ES6 modules then do the following.
 
 ```
-import Timer from "readable-elapsed-timer";
+import { Timer } from "readable-elapsed-timer";
 ```
 
 If your poject uses CommonJS modules, then do the following.
 
 ```
-const Timer = require('readable-elapsed-timer')
+const { Timer } = require('readable-elapsed-timer')
 ```
 
 Then you can create a new timer object to keep track of time within your code. Call the `elapsed()` method to return the time elapsed in a human readable format. To get the time between two different points without creating a new timer object, simply call the `reset()` method.
