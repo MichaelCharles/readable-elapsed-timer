@@ -1,1 +1,7 @@
- 
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist/types",
+    "emitDeclarationOnly": true
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "readable-elapsed-timer",
-  "version": "0.4.1",
+  "version": "0.4.0",
   "description": "Easily get time elapsed. Returns human readable format by default.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -18,9 +18,10 @@
   "scripts": {
     "prepare": "npm run build",
     "test": "npm run build && jest",
-    "build": "rm -rf dist && npm run build:esm && npm run build:cjs",
+    "build": "rm -rf dist && npm run build:types && npm run build:esm && npm run build:cjs",
     "build:esm": "tsc -p tsconfig.esm.json",
     "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:types": "tsc -p tsconfig.types.json",
     "test:coverage": "npm run test -- --coverage",
     "test:badges": "npm run test:coverage  && jest-coverage-badges"
   },
