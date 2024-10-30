@@ -90,3 +90,4 @@ The following additional methods are available on an instance of `Timer`.
 
 * 0.3.1 - Added two more tests for the undocumented language feature. Updated dependencies.
 * 0.4.0 - Added documentation for Japanese language support. Timer can now output elapsed time in Japanese format when initialized with `language: "ja"` option.
+* 0.4.2 - Fixed issues with type declarations. You should be able to more easily import this library now.
