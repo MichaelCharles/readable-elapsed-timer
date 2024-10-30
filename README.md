@@ -57,7 +57,8 @@ The constructor accepts an `options` object as an argument.
 ```
 const options = {
     start: new Date('November 5, 1955').getTime(),
-    brief: true
+    brief: true,
+    language: 'ja'  // Supports 'en' (default) or 'ja' for Japanese output
 }
 ```
 
@@ -76,7 +77,7 @@ console.log(elapsed);
 // "525600 hours"
 ```
 
-Setting `start` allows you to give the timer instance an arbitrary start time. Setting `brief` changes the default function of the timer instance to show time formatted as abbreviations ("5s" instead of "5 seconds").
+Setting `start` allows you to give the timer instance an arbitrary start time. Setting `brief` changes the default function of the timer instance to show time formatted as abbreviations ("5s" instead of "5 seconds"). Setting `language` to "ja" will output times in Japanese format (e.g., "5秒" instead of "5 seconds").
 
 The following additional methods are available on an instance of `Timer`.
 
@@ -88,3 +89,4 @@ The following additional methods are available on an instance of `Timer`.
 # Releases
 
 * 0.3.1 - Added two more tests for the undocumented language feature. Updated dependencies.
+* 0.4.0 - Added documentation for Japanese language support. Timer can now output elapsed time in Japanese format when initialized with `language: "ja"` option.
