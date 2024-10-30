@@ -28,12 +28,12 @@ const main = async () => {
   const timer = new Timer();
   await delay(100);
   console.log(timer.elapsed());
-  // "100 miliseconds"
+  // "100 milliseconds"
 
   timer.reset()
   await delay(500);
   console.log(timer.elapsed());
-  // "500 miliseconds"
+  // "500 milliseconds"
 
   await delay(1000);
   console.log(timer.elapsed());
@@ -82,8 +82,8 @@ The following additional methods are available on an instance of `Timer`.
 
 - `elapsedVerbose()` This will return the time elapsed formatted to be human readable even if the timer is configured otherwise. If `timer.elapsedVerbose()` is called after five seconds, `5 seconds` will be returned.
 - `elapsedBrief()` This will return the time elapsed formatted using abbreviations even if the timer is configured otherwise. If `timer.elapsedBrief()` is called after five seconds, `5s` will be returned.
-- `elapsedRaw()` This will return the time elapsed in miliseconds without any additional formatting. If `timer.elapsedRaw()` is called after five seconds, `5000` will be returned.
-- `elapsedRaw()` This will return the time elapsed in miliseconds without any additional formatting. If `timer.elapsedRaw()` is called after five seconds, `5000` will be returned.
+- `elapsedRaw()` This will return the time elapsed in milliseconds without any additional formatting. If `timer.elapsedRaw()` is called after five seconds, `5000` will be returned.
+- `elapsedRaw()` This will return the time elapsed in milliseconds without any additional formatting. If `timer.elapsedRaw()` is called after five seconds, `5000` will be returned.
 
 # Releases
 
