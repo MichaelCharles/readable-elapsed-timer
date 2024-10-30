@@ -178,3 +178,115 @@ test(`can compare arbitrary times by setting start and end in elapsedRaw only`, 
   });
   expect(elapsed).toBe("20s");
 });
+
+test(`When initalized with Japanese, 3600000 milliseconds becomes '1時間'.`, () => {
+  const timer = new TestTimer({
+    language: "ja",
+  });
+  const now = Date.now();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 3600000,
+    end: now,
+  });
+  expect(elapsed).toBe("1時間");
+});
+
+test(`When initalized with Japanese, 7200000 milliseconds becomes '2時間'.`, () => {
+  const timer = new TestTimer({
+    language: "ja",
+  });
+  const now = Date.now();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 7200000,
+    end: now,
+  });
+  expect(elapsed).toBe("2時間");
+});
+
+test(`When initalized with Japanese, 60000 milliseconds becomes '1分'.`, () => {
+  const timer = new TestTimer({ language: "ja" });
+  const now = Date.now();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 60000,
+    end: now,
+  });
+  expect(elapsed).toBe("1分");
+});
+
+test(`When initalized with Japanese, 120000 milliseconds becomes '2分'.`, () => {
+  const timer = new TestTimer({ language: "ja" });
+  const now = Date.now();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 120000,
+    end: now,
+  });
+  expect(elapsed).toBe("2分");
+});
+
+test(`When initalized with Japanese, 2000 milliseconds becomes '2秒'.`, () => {
+  const timer = new TestTimer({ language: "ja" });
+  const now = Date.now();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 2000,
+    end: now,
+  });
+  expect(elapsed).toBe("2秒");
+});
+
+test(`When initalized with Japanese, 1000 milliseconds becomes '1秒'.`, () => {
+  const timer = new TestTimer({ language: "ja" });
+  const now = Date.now();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 1000,
+    end: now,
+  });
+  expect(elapsed).toBe("1秒");
+});
+
+test(`When initalized with Japanese, 2 milliseconds becomes '2ミリ秒'.`, () => {
+  const timer = new TestTimer({ language: "ja" });
+  const now = Date.now();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 2,
+    end: now,
+  });
+  expect(elapsed).toBe("2ミリ秒");
+});
+
+test(`When initalized with Japanese, 1 millisecond becomes '1ミリ秒'.`, () => {
+  const timer = new TestTimer({ language: "ja" });
+  const now = Date.now();
+  const elapsed = timer.elapsedVerbose({
+    start: now - 1,
+    end: now,
+  });
+  expect(elapsed).toBe("1ミリ秒");
+});
+
+test(`When initalized with Japanese, the language settings persist after a reset.`, () => {
+  const timer = new TestTimer({ language: "ja" });
+  let now = Date.now();
+  let elapsed = timer.elapsedVerbose({
+    start: now - 1,
+    end: now,
+  });
+
+  timer.reset();
+  now = Date.now();
+  elapsed = timer.elapsedVerbose({
+    start: now - 1,
+    end: now,
+  });
+
+  expect(elapsed).toBe("1ミリ秒");
+});
+
+test(`When initalized with Japanese, the language settings persist after a reset and calling elapsed.`, () => {
+  const timer = new TestTimer({ language: "ja" });
+  let now = Date.now();
+  let elapsed = timer.elapsed();
+  timer.reset();
+  now = Date.now();
+  elapsed = timer.elapsed();
+  expect((elapsed + "").includes("ミリ秒")).toBe(true);
+});
